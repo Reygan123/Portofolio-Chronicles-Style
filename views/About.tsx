@@ -26,7 +26,7 @@ const QuestItem: React.FC<{ exp: Experience }> = ({ exp }) => (
     
     <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
       <h4 className="font-cinzel text-lg text-neutral-200">{exp.role}</h4>
-      <span className="font-mono text-xs text-gold/60 bg-gold/5 px-2 py-1 rounded border border-gold/10">{exp.period}</span>
+      <span className="font-mono text-xs text-gold/60 bg-gold/5 px-2 py-1 rounded border border-gold/10 mt-1 sm:mt-0 w-fit">{exp.period}</span>
     </div>
     <div className="font-cinzel text-sm text-neutral-500 mb-2">{exp.company}</div>
     <p className="font-sans text-sm text-neutral-400 leading-relaxed max-w-2xl">
@@ -38,10 +38,10 @@ const QuestItem: React.FC<{ exp: Experience }> = ({ exp }) => (
 const About: React.FC = () => {
   return (
     <section className="min-h-screen pt-28 pb-20 px-4 max-w-6xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
         
         {/* Left Column: Bio & Skills */}
-        <div className="lg:col-span-5 space-y-12">
+        <div className="lg:col-span-5 space-y-8 lg:space-y-12">
           {/* Portrait/Bio */}
           <GoldenFrame variant="heavy">
             <div className="flex flex-col items-center text-center">
@@ -92,7 +92,7 @@ const About: React.FC = () => {
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {['VS Code', 'Figma', 'Git Bash', 'Coffee of Haste', 'Mechanical Keyboard', 'Dual Monitors'].map(item => (
                   <div key={item} className="flex items-center gap-2 text-neutral-400 text-sm font-mono p-2 bg-black/20 border border-neutral-800">
-                     <div className="w-1.5 h-1.5 bg-bronze rounded-full" /> {item}
+                     <div className="w-1.5 h-1.5 bg-bronze rounded-full flex-shrink-0" /> {item}
                   </div>
                 ))}
               </div>

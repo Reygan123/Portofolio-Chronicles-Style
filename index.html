@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Scroll of the Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Inter:wght@300;400;600&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              void: '#0a0a0a',
+              charcoal: '#1A1A1A',
+              ash: '#2D2D2D',
+              iron: '#404040',
+              gold: {
+                DEFAULT: '#C8A15B',
+                dim: '#8B6F3E',
+                bright: '#D4AF37',
+                glow: '#FCD34D',
+              },
+              bronze: '#8B4513',
+              mana: '#1E3A8A', // Deep blue for interactions
+              health: '#7F1D1D', // Deep red for accents
+            },
+            fontFamily: {
+              cinzel: ['"Cinzel Decorative"', 'serif'],
+              sans: ['"Inter"', 'sans-serif'],
+              mono: ['"Fira Code"', 'monospace'],
+            },
+            backgroundImage: {
+              'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+              'vignette': 'radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%)',
+            },
+            animation: {
+              'float': 'float linear infinite',
+            },
+            keyframes: {
+              float: {
+                '0%': { transform: 'translateY(0) translateX(0)', opacity: '0' },
+                '10%': { opacity: '1' },
+                '90%': { opacity: '1' },
+                '100%': { transform: 'translateY(-100px) translateX(20px)', opacity: '0' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #0a0a0a;
+        color: #e5e5e5;
+        cursor: none; /* Hidden default cursor */
+      }
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1A1A1A;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #404040;
+        border: 1px solid #C8A15B;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+      
+      /* Ensure text selection doesn't break immersion too much */
+      ::selection {
+        background: rgba(200, 161, 91, 0.3);
+        color: white;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

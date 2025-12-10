@@ -55,6 +55,7 @@
       body {
         background-color: #0a0a0a;
         color: #e5e5e5;
+        cursor: none; /* Hidden default cursor */
       }
       /* Custom scrollbar */
       ::-webkit-scrollbar {
@@ -69,6 +70,12 @@
       }
       ::-webkit-scrollbar-thumb:hover {
         background: #555;
+      }
+      
+      /* Ensure text selection doesn't break immersion too much */
+      ::selection {
+        background: rgba(200, 161, 91, 0.3);
+        color: white;
       }
     </style>
   <script type="importmap">

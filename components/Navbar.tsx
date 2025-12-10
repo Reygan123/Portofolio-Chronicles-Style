@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ViewState } from '../types';
 import { NAVIGATION_ITEMS } from '../constants';
 import { Menu, X } from 'lucide-react';
+import { playSound } from '../utils/audio';
 
 interface NavbarProps {
   currentView: ViewState;
@@ -21,8 +22,15 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onChangeView }) => {
     return () => { document.body.style.overflow = 'unset'; };
   }, [isMobileOpen]);
 
+  const handleNavClick = (view: ViewState) => {
+    playSound('click');
+    onChangeView(view);
+    setIsMobileOpen(false);
+  };
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-20 flex items-center justify-center">
+    // Added mt-8 md:mt-8 to push Navbar below the PlayerHUD
+    <nav className="fixed top-0 left-0 right-0 z-50 h-16 md:h-20 flex items-center justify-center mt-9 md:mt-8 transition-all duration-300">
       <div className="absolute inset-0 bg-gradient-to-b from-void via-void/90 to-transparent pointer-events-none" />
       
       {/* Border Line */}
@@ -35,7 +43,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onChangeView }) => {
           return (
             <li key={item.id}>
               <button
-                onClick={() => onChangeView(item.id as ViewState)}
+                onClick={() => handleNavClick(item.id as ViewState)}
+                onMouseEnter={() => playSound('hover')}
                 className={`group relative py-2 px-1 transition-colors duration-300 ${
                   isActive ? 'text-gold' : 'text-neutral-500 hover:text-neutral-300'
                 }`}
@@ -59,11 +68,11 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onChangeView }) => {
       <div className="md:hidden absolute inset-0 flex items-center justify-between px-6 pointer-events-auto w-full">
          <span className="font-cinzel text-gold text-lg tracking-widest font-bold">Chronicles</span>
          <button 
-            onClick={() => setIsMobileOpen(true)} 
+            onClick={() => { playSound('click'); setIsMobileOpen(true); }}
             className="text-gold p-2 hover:text-gold-bright transition-colors"
             aria-label="Open Menu"
          >
-            <Menu size={28} />
+            <Menu size={24} />
          </button>
       </div>
 
@@ -72,7 +81,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onChangeView }) => {
         className={`fixed inset-0 bg-void/95 backdrop-blur-xl z-50 flex flex-col items-center justify-center transition-all duration-500 md:hidden ${isMobileOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
       >
         <button 
-          onClick={() => setIsMobileOpen(false)} 
+          onClick={() => { playSound('click'); setIsMobileOpen(false); }}
           className="absolute top-6 right-6 text-gold p-2 hover:text-gold-bright transition-colors"
           aria-label="Close Menu"
         >
@@ -81,7 +90,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onChangeView }) => {
 
         <div className="w-16 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mb-12 opacity-50"></div>
         
-        <ul className="flex flex-col items-center gap-8 text-center">
+        <ul className="flex flex-col items-center gap-6 text-center">
           {NAVIGATION_ITEMS.map((item, index) => {
              const isActive = currentView === item.id;
              return (
@@ -91,8 +100,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onChangeView }) => {
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <button
-                  onClick={() => { onChangeView(item.id as ViewState); setIsMobileOpen(false); }}
-                  className={`font-cinzel text-2xl tracking-widest uppercase transition-all duration-300 ${
+                  onClick={() => handleNavClick(item.id as ViewState)}
+                  className={`font-cinzel text-xl tracking-widest uppercase transition-all duration-300 ${
                     isActive ? 'text-gold scale-110 drop-shadow-[0_0_8px_rgba(200,161,91,0.5)]' : 'text-neutral-500 hover:text-neutral-300'
                   }`}
                 >

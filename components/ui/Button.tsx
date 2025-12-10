@@ -1,4 +1,5 @@
 import React from 'react';
+import { playSound } from '../../utils/audio';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary';
@@ -6,7 +7,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({ variant = 'primary', label, icon, className = "", ...props }) => {
+const Button: React.FC<ButtonProps> = ({ variant = 'primary', label, icon, className = "", onClick, ...props }) => {
   const baseStyles = "relative px-8 py-3 font-cinzel font-bold tracking-wider transition-all duration-300 flex items-center justify-center gap-3 overflow-hidden group";
   
   const variants = {
@@ -14,8 +15,22 @@ const Button: React.FC<ButtonProps> = ({ variant = 'primary', label, icon, class
     secondary: "text-neutral-400 border border-neutral-600 hover:text-neutral-200 hover:border-neutral-400 hover:bg-neutral-800",
   };
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    playSound('click');
+    if (onClick) onClick(e);
+  };
+
+  const handleMouseEnter = () => {
+    playSound('hover');
+  };
+
   return (
-    <button className={`${baseStyles} ${variants[variant]} ${className}`} {...props}>
+    <button 
+      className={`${baseStyles} ${variants[variant]} ${className}`} 
+      onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
+      {...props}
+    >
       <span className="relative z-10 flex items-center gap-2">
         {label}
         {icon}
